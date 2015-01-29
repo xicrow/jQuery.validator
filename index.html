@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>cosyValidator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body{
+	font-weight:normal;
+	font-size:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	background-color:#FFF;
+}
+pre{
+	margin:10px 0px; padding:10px;
+	background-color:#F5F5F5;
+	border:1px solid #DDD;
+	white-space:pre-wrap;
+	display:block;
+}
+
+input[type=text],
+input[type=password],
+input[type=file],
+textarea,
+select{
+	margin:0px; padding:5px;
+	width:400px;
+	font-weight:inherit;
+	font-size:inherit;
+	font-family:inherit;
+	color:#333;
+	background-color:#FFF;
+	border:1px solid #EEE;
+}
+select{
+	width:412px;
+}
+
+/*
+.cosyValidator-valid{
+	color:#FFF !important;
+	background-color:#0C0 !important;
+	border-color:#0C0 !important;
+}
+.cosyValidator-invalid{
+	color:#FFF !important;
+	background-color:#F00 !important;
+	border-color:#F00 !important;
+}
+*/
+.cosyValidator-error{
+	margin:5px 0px; padding:5px;
+	color:#FFF;
+	background-color:#F00;
+}
+</style>
+</head>
+
+<body>
+
+<h1>cosyValidator</h1>
+<p>...</p>
+<p>&nbsp;</p>
+
+<form method="get" action="" id="test-form">
+<table border="0" cellspacing="0" cellpadding="5">
+<tr>
+	<td align="left" valign="top">
+	Name
+	</td>
+	
+	<td align="left" valign="top">
+	<input type="text" name="name" />
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top">
+	E-mail
+	</td>
+	
+	<td align="left" valign="top">
+	<input type="text" name="email" />
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top">
+	Relationship status
+	</td>
+	
+	<td align="left" valign="top">
+	<select size="1" name="relationship_status">
+		<option value="">- Select -</option>
+		<option value="single">Single</option>
+		<option value="relationship">In a relationship</option>
+		<option value="married">Married</option>
+		<option value="other">Other</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top">
+	Gender
+	</td>
+	
+	<td align="left" valign="top">
+	<label>
+	<input type="radio" name="gender" value="male" />
+	Male
+	</label>
+	<br />
+	<label>
+	<input type="radio" name="gender" value="female" />
+	Female
+	</label>
+	<br />
+	<label>
+	<input type="radio" name="gender" value="other" />
+	Other
+	</label>
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top">
+	Description
+	</td>
+	
+	<td align="left" valign="top">
+	<textarea name="description"></textarea>
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top">
+	Image
+	</td>
+	
+	<td align="left" valign="top">
+	<input type="file" name="image" />
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top">
+	Terms
+	</td>
+	
+	<td align="left" valign="top">
+	<label>
+	<input type="checkbox" name="terms" />
+	I have read and agree to your <a href="#">terms and conditions</a>
+	</label>
+	</td>
+</tr>
+<tr>
+	<td align="left" valign="top"></td>
+	
+	<td align="left" valign="top">
+	<input type="submit" value="Save" />
+	<input type="reset" value="Reset" />
+	</td>
+</tr>
+</table>
+</form>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.cosyValidator.js"></script>
+<!--
+<script type="text/javascript" src="jquery.cosyValidator.min.js"></script>
+-->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#test-form').cosyValidator({
+		validateOnInit : false,
+		validateOnSubmit : true,
+		validateOnReset : false,
+		rules : {
+			name : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : true
+			},
+			relationship_status : {
+				required : true
+			},
+			gender : {
+				required : true
+			},
+			description : {
+				required : true,
+				rangelength : [50, 500]
+			},
+			image : {
+				required : true
+			},
+			terms : {
+				required : true
+			}
+		},
+		messages : {
+			name : {
+				required : 'Name is required'
+			},
+			email : {
+				required : 'E-mail is required',
+				email : 'E-mail must be a valid e-mail adress'
+			},
+			relationship_status : {
+				required : 'Relationship status must be selected'
+			},
+			gender : {
+				required : 'Gender must be selected'
+			},
+			description : {
+				required : 'Description is required',
+				rangelength : 'Description must be between %s and %s characters long.'
+			},
+			image : {
+				required : 'Image must be selected'
+			},
+			terms : {
+				required : 'You must accept our terms and conditions'
+			}
+		}
+	});
+});
+</script>
+
+</body>
+
+</html>
